@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>CR7 SIUUUU Word Football</title>
+    <title>WORD DUEL - Vocabulary Card Battle</title>
 
     <style>
 
@@ -13,289 +13,225 @@
 
         body {
             margin: 0;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
             background:
-                radial-gradient(circle at top, #252525, #050505 70%);
+                radial-gradient(circle at center, #25204a, #090914 70%);
             color: white;
             text-align: center;
-            min-height: 100vh;
-            overflow-x: hidden;
         }
 
         /* =========================
-           TOP
+           HEADER
         ========================= */
 
-        .top {
-            padding-top: 25px;
+        header {
+            padding: 25px 10px 10px;
         }
 
-        .cr7 {
-            font-size: 80px;
+        .logo {
+            font-size: 48px;
             font-weight: 900;
-            font-style: italic;
-            color: #d4af37;
-            text-shadow:
-                4px 4px 0 #000,
-                0 0 25px #d4af37;
-        }
-
-        .title {
-            font-size: 25px;
             letter-spacing: 5px;
-            font-weight: bold;
+            color: #f4d35e;
+            text-shadow: 0 0 20px #f4d35e;
         }
 
         .subtitle {
             color: #aaa;
-            margin-top: 8px;
+            letter-spacing: 3px;
         }
 
         /* =========================
-           SCORE
+           BATTLE AREA
         ========================= */
 
-        .scoreboard {
-            width: 90%;
-            max-width: 650px;
+        .battle {
+            width: 95%;
+            max-width: 900px;
             margin: 20px auto;
-            padding: 12px;
-            background: #111;
-            border: 2px solid #d4af37;
-            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .fighters {
             display: flex;
-            justify-content: space-around;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .score-number {
-            color: #d4af37;
-            font-size: 30px;
-        }
-
-        /* =========================
-           START SCREEN
-        ========================= */
-
-        #startScreen {
+            justify-content: space-between;
+            align-items: center;
             max-width: 750px;
-            margin: 20px auto;
-            padding: 35px 20px;
-        }
-
-        .big-seven {
-            font-size: 170px;
-            font-weight: 900;
-            font-style: italic;
-            color: white;
-            text-shadow:
-                8px 8px 0 #d4af37,
-                0 0 40px #d4af37;
-            line-height: 0.9;
-        }
-
-        .ball {
-            font-size: 80px;
-            margin: 20px;
-            animation: ballMove 2s infinite alternate ease-in-out;
-        }
-
-        @keyframes ballMove {
-
-            from {
-                transform: translateX(-50px) rotate(0deg);
-            }
-
-            to {
-                transform: translateX(50px) rotate(360deg);
-            }
-
-        }
-
-        .start-button {
-            font-size: 30px;
-            font-weight: 900;
-            padding: 20px 60px;
-            border: 4px solid #d4af37;
-            border-radius: 60px;
-            background: #111;
-            color: #d4af37;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 0 20px rgba(212,175,55,0.5);
-        }
-
-        .start-button:hover {
-            background: #d4af37;
-            color: black;
-            transform: scale(1.1);
-        }
-
-        /* =========================
-           GAME
-        ========================= */
-
-        #game {
-            display: none;
-            max-width: 850px;
             margin: auto;
         }
 
-        .stadium {
-            position: relative;
-            width: 95%;
-            max-width: 750px;
-            height: 280px;
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 20px;
-            border: 3px solid #d4af37;
-
-            background:
-                linear-gradient(
-                    to bottom,
-                    #222 0%,
-                    #222 35%,
-                    #0d6b2d 35%,
-                    #159447 100%
-                );
+        .fighter {
+            width: 220px;
         }
 
-        /* 관중 */
-        .crowd {
-            font-size: 25px;
-            letter-spacing: 5px;
-            padding-top: 15px;
-            white-space: nowrap;
-        }
-
-        /* 골대 */
-        .goal {
-            position: absolute;
-            right: 35px;
-            bottom: 35px;
-            width: 190px;
-            height: 130px;
-            border: 7px solid white;
-            border-bottom: 0;
-            background:
-                repeating-linear-gradient(
-                    90deg,
-                    transparent 0px,
-                    transparent 18px,
-                    rgba(255,255,255,0.25) 19px,
-                    transparent 20px
-                );
-        }
-
-        .goalkeeper {
-            position: absolute;
-            right: 100px;
-            bottom: 35px;
-            font-size: 65px;
-            z-index: 3;
-        }
-
-        .football {
-            position: absolute;
-            left: 80px;
-            bottom: 40px;
-            font-size: 55px;
-            transition: all 1s ease;
-            z-index: 5;
-        }
-
-        .football.shoot {
-            left: 560px;
-            bottom: 140px;
-            transform: rotate(720deg) scale(0.7);
-        }
-
-        .football.save {
-            left: 560px;
-            bottom: 70px;
-            transform: rotate(720deg) scale(0.7);
-        }
-
-        .player {
-            position: absolute;
-            left: 70px;
-            bottom: 30px;
-            font-size: 75px;
-            z-index: 4;
-        }
-
-        /* =========================
-           QUESTION
-        ========================= */
-
-        .question-box {
-            width: 90%;
-            max-width: 700px;
-            margin: 20px auto;
-            padding: 25px;
-            background: rgba(255,255,255,0.06);
-            border: 2px solid #d4af37;
-            border-radius: 25px;
-        }
-
-        #question {
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        .progress {
-            color: #aaa;
-            margin-bottom: 10px;
-        }
-
-        /* =========================
-           ANSWER BUTTONS
-        ========================= */
-
-        .answers {
+        .avatar {
+            width: 120px;
+            height: 120px;
+            margin: auto;
+            border-radius: 50%;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
+            align-items: center;
+            font-size: 65px;
+            background: #17172b;
+            border: 4px solid #f4d35e;
+            box-shadow: 0 0 25px rgba(244,211,94,0.3);
         }
 
-        .answer {
-            min-width: 150px;
-            padding: 18px 25px;
-            font-size: 20px;
+        .name {
+            font-size: 22px;
             font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .hp-bar {
+            height: 18px;
+            background: #222;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 10px;
+            border: 2px solid #555;
+        }
+
+        .hp {
+            height: 100%;
+            width: 100%;
+            background: #36d278;
+            transition: width 0.5s;
+        }
+
+        .enemy-hp {
+            background: #ff4d6d;
+        }
+
+        .vs {
+            font-size: 45px;
+            font-weight: 900;
+            color: #f4d35e;
+            font-style: italic;
+        }
+
+        /* =========================
+           ROUND
+        ========================= */
+
+        .round {
+            margin: 20px;
+            color: #aaa;
+        }
+
+        /* =========================
+           ENEMY CARD
+        ========================= */
+
+        .enemy-card-area {
+            perspective: 1000px;
+            margin: 20px auto;
+        }
+
+        .enemy-card {
+            width: 320px;
+            min-height: 170px;
+            margin: auto;
+            padding: 25px;
+            background:
+                linear-gradient(145deg, #30245e, #16132e);
+            border: 3px solid #f4d35e;
+            border-radius: 20px;
+            box-shadow:
+                0 15px 30px rgba(0,0,0,0.5),
+                0 0 20px rgba(244,211,94,0.2);
+            transform: rotateX(0deg);
+            transition: transform 0.5s;
+        }
+
+        .enemy-card:hover {
+            transform: rotateX(5deg) rotateY(-5deg);
+        }
+
+        .card-label {
+            font-size: 13px;
+            color: #aaa;
+            letter-spacing: 3px;
+        }
+
+        .word {
+            font-size: 38px;
+            font-weight: 900;
+            margin: 25px 0;
             color: white;
-            background: #111;
-            border: 3px solid #d4af37;
+        }
+
+        /* =========================
+           ANSWER CARDS
+        ========================= */
+
+        .answer-title {
+            color: #aaa;
+            margin: 25px 0 10px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .answer-card {
+            width: 190px;
+            height: 230px;
+            padding: 15px;
             cursor: pointer;
-            transition: 0.2s;
+            border-radius: 18px;
+            background:
+                linear-gradient(145deg, #15152a, #29294a);
+            border: 3px solid #777;
+            transition: 0.25s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .answer:hover {
-            background: #d4af37;
-            color: black;
-            transform: translateY(-7px);
-            box-shadow: 0 10px 25px rgba(212,175,55,0.4);
+        .answer-card::before {
+            content: "◆";
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            color: #f4d35e;
+            font-size: 20px;
         }
 
-        .answer:nth-child(1) {
-            border-radius: 50px;
+        .answer-card::after {
+            content: "◆";
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            color: #f4d35e;
+            font-size: 20px;
         }
 
-        .answer:nth-child(2) {
-            border-radius: 5px 25px 5px 25px;
+        .answer-card:hover {
+            transform:
+                translateY(-15px)
+                rotate(-2deg);
+            border-color: #f4d35e;
+            box-shadow:
+                0 15px 30px rgba(244,211,94,0.25);
         }
 
-        .answer:nth-child(3) {
-            border-radius: 15px;
-            transform: rotate(-1deg);
+        .card-number {
+            text-align: right;
+            color: #aaa;
         }
 
-        .answer:nth-child(3):hover {
-            transform: rotate(1deg) translateY(-7px);
+        .answer-text {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            font-weight: bold;
         }
 
         /* =========================
@@ -303,699 +239,34 @@
         ========================= */
 
         #feedback {
-            min-height: 70px;
-            font-size: 35px;
-            font-weight: 900;
-            margin: 15px;
-        }
-
-        .goal-text {
-            color: #d4af37;
-            animation: goalAnimation 0.7s infinite alternate;
-        }
-
-        @keyframes goalAnimation {
-
-            from {
-                transform: scale(1);
-            }
-
-            to {
-                transform: scale(1.2);
-            }
-
-        }
-
-        .miss-text {
-            color: #ff5555;
-        }
-
-        /* =========================
-           CELEBRATION
-        ========================= */
-
-        #celebration {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.88);
-            z-index: 20;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .siuuu {
-            font-size: 100px;
-            font-weight: 900;
-            font-style: italic;
-            color: #d4af37;
-            text-shadow:
-                5px 5px 0 black,
-                0 0 30px #d4af37;
-            animation: siuuu 0.6s infinite alternate;
-        }
-
-        @keyframes siuuu {
-
-            from {
-                transform: scale(1) rotate(-3deg);
-            }
-
-            to {
-                transform: scale(1.15) rotate(3deg);
-            }
-
-        }
-
-        .celebration-text {
+            min-height: 55px;
+            margin: 20px;
             font-size: 30px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        /* =========================
-           FINAL
-        ========================= */
-
-        #finalScreen {
-            display: none;
-            max-width: 700px;
-            margin: 30px auto;
-            padding: 40px 20px;
-        }
-
-        .trophy {
-            font-size: 100px;
-        }
-
-        .final-title {
-            font-size: 50px;
-            color: #d4af37;
             font-weight: 900;
         }
 
-        .final-score {
-            font-size: 45px;
-            margin: 25px;
+        .correct {
+            color: #36d278;
         }
 
-        .restart {
-            padding: 15px 40px;
-            font-size: 20px;
-            font-weight: bold;
-            border: 3px solid #d4af37;
-            border-radius: 40px;
-            background: #111;
-            color: white;
-            cursor: pointer;
+        .wrong {
+            color: #ff4d6d;
         }
-
-        .restart:hover {
-            background: #d4af37;
-            color: black;
-        }
-
-        /* 모바일 */
-
-        @media (max-width: 600px) {
-
-            .cr7 {
-                font-size: 60px;
-            }
-
-            .big-seven {
-                font-size: 120px;
-            }
-
-            #question {
-                font-size: 23px;
-            }
-
-            .siuuu {
-                font-size: 65px;
-            }
-
-            .goal {
-                right: 20px;
-                width: 150px;
-            }
-
-            .football.shoot,
-            .football.save {
-                left: 500px;
-            }
-
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-
-    <!-- =========================
-         HEADER
-    ========================= -->
-
-    <div class="top">
-
-        <div class="cr7">CR7</div>
-
-        <div class="title">
-            SIUUUU WORD FOOTBALL
-        </div>
-
-        <div class="subtitle">
-            KNOW THE WORD • SCORE THE GOAL • SIUUUU
-        </div>
-
-    </div>
-
-
-    <!-- SCOREBOARD -->
-
-    <div class="scoreboard">
-
-        <div>
-            GOALS<br>
-            <span class="score-number" id="goals">0</span>
-        </div>
-
-        <div>
-            QUESTION<br>
-            <span class="score-number" id="questionNumber">0/5</span>
-        </div>
-
-        <div>
-            CR7<br>
-            <span class="score-number">7</span>
-        </div>
-
-    </div>
-
-
-    <!-- =========================
-         START SCREEN
-    ========================= -->
-
-    <div id="startScreen">
-
-        <div class="big-seven">
-            7
-        </div>
-
-        <div class="ball">
-            ⚽
-        </div>
-
-        <h2>
-            READY TO BECOME THE WORD GOAT?
-        </h2>
-
-        <p>
-            Answer the vocabulary question and score a goal!
-        </p>
-
-        <br>
-
-        <button class="start-button" onclick="startGame()">
-            ⚽ START MATCH
-        </button>
-
-    </div>
-
-
-    <!-- =========================
-         GAME
-    ========================= -->
-
-    <div id="game">
-
-
-        <!-- STADIUM -->
-
-        <div class="stadium">
-
-            <div class="crowd">
-                👏 👏 🧑 👏 👏 🧑 👏 👏 🧑 👏 👏 🧑
-            </div>
-
-            <div class="goal"></div>
-
-            <div class="goalkeeper">
-                🧤
-            </div>
-
-            <div class="player">
-                🏃‍♂️
-            </div>
-
-            <div class="football" id="football">
-                ⚽
-            </div>
-
-        </div>
-
-
-        <!-- QUESTION -->
-
-        <div class="question-box">
-
-            <div class="progress" id="progress">
-                Question 1 / 5
-            </div>
-
-            <div id="question">
-                What does "look for" mean?
-            </div>
-
-
-            <div class="answers">
-
-                <button class="answer" id="answer1">
-                    Search
-                </button>
-
-                <button class="answer" id="answer2">
-                    Avoid
-                </button>
-
-                <button class="answer" id="answer3">
-                    Watch
-                </button>
-
-            </div>
-
-
-            <div id="feedback"></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================
-         CELEBRATION
-    ========================= -->
-
-    <div id="celebration">
-
-        <div class="siuuu">
-            SIUUUUUU!
-        </div>
-
-        <div class="celebration-text">
-            ⚽ GOOOOOOAL! ⚽
-        </div>
-
-    </div>
-
-
-    <!-- =========================
-         FINAL SCREEN
-    ========================= -->
-
-    <div id="finalScreen">
-
-        <div class="trophy">
-            🏆
-        </div>
-
-        <div class="final-title">
-            FULL TIME
-        </div>
-
-        <div class="final-score" id="finalScore">
-            5 / 5
-        </div>
-
-        <p id="finalMessage"></p>
-
-        <br>
-
-        <button class="restart" onclick="location.reload()">
-            🔄 PLAY AGAIN
-        </button>
-
-    </div>
-
-
-
-    <script>
-
 
         /* =========================
-           QUESTIONS
+           ATTACK EFFECT
         ========================= */
 
-        const questions = [
-
-            {
-                word: "look for",
-                answer: "search",
-                choices: [
-                    "Search",
-                    "Avoid",
-                    "Watch"
-                ]
-            },
-
-            {
-                word: "huge",
-                answer: "big",
-                choices: [
-                    "Small",
-                    "Big",
-                    "Slow"
-                ]
-            },
-
-            {
-                word: "rapid",
-                answer: "fast",
-                choices: [
-                    "Slow",
-                    "Fast",
-                    "Quiet"
-                ]
-            },
-
-            {
-                word: "purchase",
-                answer: "buy",
-                choices: [
-                    "Sell",
-                    "Buy",
-                    "Borrow"
-                ]
-            },
-
-            {
-                word: "difficult",
-                answer: "hard",
-                choices: [
-                    "Easy",
-                    "Hard",
-                    "Funny"
-                ]
-            }
-
-        ];
-
-
-        let currentQuestion = 0;
-
-        let goals = 0;
-
-        let answered = false;
-
-
-        /* =========================
-           ELEMENTS
-        ========================= */
-
-        const startScreen =
-            document.getElementById("startScreen");
-
-        const game =
-            document.getElementById("game");
-
-        const finalScreen =
-            document.getElementById("finalScreen");
-
-        const celebration =
-            document.getElementById("celebration");
-
-        const football =
-            document.getElementById("football");
-
-        const feedback =
-            document.getElementById("feedback");
-
-
-        const buttons = [
-
-            document.getElementById("answer1"),
-
-            document.getElementById("answer2"),
-
-            document.getElementById("answer3")
-
-        ];
-
-
-        /* =========================
-           START
-        ========================= */
-
-        function startGame() {
-
-            startScreen.style.display = "none";
-
-            game.style.display = "block";
-
-            currentQuestion = 0;
-
-            goals = 0;
-
-            document.getElementById("goals").innerText = goals;
-
-            showQuestion();
-
+        .attack {
+            animation: attack 0.5s;
         }
 
+        @keyframes attack {
 
-        /* =========================
-           SHOW QUESTION
-        ========================= */
-
-        function showQuestion() {
-
-            answered = false;
-
-            let q = questions[currentQuestion];
-
-
-            document.getElementById("question").innerText =
-                'What does "' + q.word + '" mean?';
-
-
-            document.getElementById("progress").innerText =
-                "Question " +
-                (currentQuestion + 1) +
-                " / " +
-                questions.length;
-
-
-            document.getElementById("questionNumber").innerText =
-                (currentQuestion + 1) +
-                "/" +
-                questions.length;
-
-
-            for (let i = 0; i < 3; i++) {
-
-                buttons[i].innerText =
-                    q.choices[i];
-
-                buttons[i].onclick = function () {
-
-                    checkAnswer(
-                        q.choices[i].toLowerCase()
-                    );
-
-                };
-
-                buttons[i].disabled = false;
-
+            0% {
+                transform: translateX(0);
             }
 
-
-            feedback.innerText = "";
-
-            football.className = "football";
-
-        }
-
-
-        /* =========================
-           ANSWER
-        ========================= */
-
-        function checkAnswer(answer) {
-
-            if (answered) {
-                return;
-            }
-
-            answered = true;
-
-
-            buttons.forEach(function(button) {
-
-                button.disabled = true;
-
-            });
-
-
-            let q = questions[currentQuestion];
-
-
-            if (answer === q.answer) {
-
-                /* GOAL */
-
-                goals++;
-
-                document.getElementById("goals").innerText =
-                    goals;
-
-
-                feedback.innerHTML =
-                    '<span class="goal-text">⚽ GOAL!!!</span>';
-
-
-                football.className =
-                    "football shoot";
-
-
-                setTimeout(function() {
-
-                    showCelebration();
-
-                }, 700);
-
-
-            }
-
-            else {
-
-                /* MISS */
-
-                feedback.innerHTML =
-                    '<span class="miss-text">❌ MISS!</span><br>' +
-                    '<small>Answer: ' +
-                    q.answer +
-                    '</small>';
-
-
-                football.className =
-                    "football save";
-
-
-                setTimeout(function() {
-
-                    nextQuestion();
-
-                }, 1500);
-
-            }
-
-        }
-
-
-        /* =========================
-           CELEBRATION
-        ========================= */
-
-        function showCelebration() {
-
-            celebration.style.display =
-                "flex";
-
-
-            setTimeout(function() {
-
-                celebration.style.display =
-                    "none";
-
-
-                nextQuestion();
-
-            }, 1800);
-
-        }
-
-
-        /* =========================
-           NEXT QUESTION
-        ========================= */
-
-        function nextQuestion() {
-
-            currentQuestion++;
-
-
-            if (currentQuestion < questions.length) {
-
-                showQuestion();
-
-            }
-
-            else {
-
-                finishGame();
-
-            }
-
-        }
-
-
-        /* =========================
-           FINISH
-        ========================= */
-
-        function finishGame() {
-
-            game.style.display =
-                "none";
-
-
-            finalScreen.style.display =
-                "block";
-
-
-            document.getElementById("finalScore").innerText =
-                goals + " / " + questions.length;
-
-
-            let message = "";
-
-
-            if (goals === 5) {
-
-                message =
-                    "🐐 PERFECT! You are the WORD GOAT! SIUUUUUU!";
-
-            }
-
-            else if (goals >= 3) {
-
-                message =
-                    "🔥 Great match! Keep practicing your vocabulary!";
-
-            }
-
-            else {
-
-                message =
-                    "💪 Keep training! Come back and score more goals!";
-
-            }
-
-
-            document.getElementById("finalMessage").innerText =
-                message;
-
-        }
-
-    </script>
-
-
-</body>
-
-</html>
+            30% {
+                transform: trans
 ```
