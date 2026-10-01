@@ -1,9 +1,11 @@
+```html
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>siuuuu word machine</title>
 
+    <!-- CSS: Change how the app looks -->
     <style>
         body {
             font-family: Arial;
@@ -17,14 +19,20 @@
             margin: 5px;
             background-color: lightblue;
         }
+
+        #feedback {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- HTML: Change what learners see -->
+
     <h1>siuuuu word machine</h1>
 
-    <p>What does "look for" mean?</p>
+    <p id="question">What does "look for" mean?</p>
 
     <button onclick="checkAnswer('search')">
         Search
@@ -40,23 +48,135 @@
 
     <h3 id="feedback"></h3>
 
+    <p id="score"></p>
+
+
+    <!-- JavaScript: Change what happens -->
+
     <script>
+
+        let currentQuestion = 0;
+        let correctAnswers = 0;
+
+        const questions = [
+
+            {
+                word: "look for",
+                answer: "search",
+                choices: ["Search", "Avoid", "Watch"]
+            },
+
+            {
+                word: "huge",
+                answer: "big",
+                choices: ["Small", "Big", "Fast"]
+            },
+
+            {
+                word: "rapid",
+                answer: "fast",
+                choices: ["Slow", "Fast", "Quiet"]
+            },
+
+            {
+                word: "purchase",
+                answer: "buy",
+                choices: ["Sell", "Buy", "Borrow"]
+            },
+
+            {
+                word: "difficult",
+                answer: "hard",
+                choices: ["Easy", "Hard", "Funny"]
+            }
+
+        ];
+
+
+        function showQuestion() {
+
+            let question = questions[currentQuestion];
+
+            document.getElementById("question").innerText =
+                'What does "' + question.word + '" mean?';
+
+            let buttons = document.querySelectorAll("button");
+
+            buttons[0].innerText = question.choices[0];
+            buttons[1].innerText = question.choices[1];
+            buttons[2].innerText = question.choices[2];
+
+            buttons[0].onclick = function () {
+                checkAnswer(question.choices[0].toLowerCase());
+            };
+
+            buttons[1].onclick = function () {
+                checkAnswer(question.choices[1].toLowerCase());
+            };
+
+            buttons[2].onclick = function () {
+                checkAnswer(question.choices[2].toLowerCase());
+            };
+
+            document.getElementById("feedback").innerText = "";
+        }
+
 
         function checkAnswer(answer) {
 
-            if (answer === "search") {
+            let question = questions[currentQuestion];
+
+            if (answer === question.answer) {
+
                 document.getElementById("feedback").innerText =
-                    "goat 그자체...!";
+                    "Correct! Well done!";
+
+                correctAnswers++;
+
             }
 
             else {
+
                 document.getElementById("feedback").innerText =
-                    "메시입니다(틀림).";
+                    "Incorrect. The answer is " +
+                    question.answer + ".";
+
             }
 
+            currentQuestion++;
+
+            if (currentQuestion < questions.length) {
+
+                setTimeout(function () {
+                    showQuestion();
+                }, 1000);
+
+            }
+
+            else {
+
+                setTimeout(function () {
+
+                    document.getElementById("question").innerText =
+                        "Quiz Finished!";
+
+                    document.getElementById("feedback").innerText =
+                        "You got " + correctAnswers +
+                        " out of " + questions.length + " correct!";
+
+                    document.getElementById("score").innerText =
+                        "Good job!";
+
+                    document.querySelectorAll("button").forEach(function(button) {
+                        button.style.display = "none";
+                    });
+
+                }, 1000);
+            }
         }
 
     </script>
 
 </body>
 </html>
+```
