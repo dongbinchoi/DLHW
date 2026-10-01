@@ -1,8 +1,9 @@
+```html
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>SIUUUU WORD MACHINE</title>
+    <title>CR7 SIUUUU Word Football</title>
 
     <style>
 
@@ -13,282 +14,773 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #050505, #171717, #050505);
+            background:
+                radial-gradient(circle at top, #252525, #050505 70%);
             color: white;
+            text-align: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* 상단 CR7 */
+        /* =========================
+           TOP
+        ========================= */
+
         .top {
-            padding: 25px 10px 10px;
+            padding-top: 25px;
         }
 
         .cr7 {
-            font-size: 70px;
+            font-size: 80px;
             font-weight: 900;
+            font-style: italic;
             color: #d4af37;
+            text-shadow:
+                4px 4px 0 #000,
+                0 0 25px #d4af37;
+        }
+
+        .title {
+            font-size: 25px;
             letter-spacing: 5px;
-            text-shadow: 0 0 15px #d4af37;
+            font-weight: bold;
         }
 
         .subtitle {
             color: #aaa;
+            margin-top: 8px;
+        }
+
+        /* =========================
+           SCORE
+        ========================= */
+
+        .scoreboard {
+            width: 90%;
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 12px;
+            background: #111;
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-around;
             font-size: 18px;
-            letter-spacing: 3px;
+            font-weight: bold;
         }
 
-        /* 호날두 사진 */
-        .ronaldo-photo {
-            width: 260px;
-            height: 260px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 7px solid #d4af37;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-            margin: 15px auto;
-            display: block;
+        .score-number {
+            color: #d4af37;
+            font-size: 30px;
         }
 
-        /* 7 */
-        .number-seven {
-            font-size: 100px;
+        /* =========================
+           START SCREEN
+        ========================= */
+
+        #startScreen {
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 35px 20px;
+        }
+
+        .big-seven {
+            font-size: 170px;
             font-weight: 900;
+            font-style: italic;
             color: white;
             text-shadow:
-                4px 4px 0 #d4af37,
-                0 0 25px #d4af37;
+                8px 8px 0 #d4af37,
+                0 0 40px #d4af37;
             line-height: 0.9;
         }
 
-        .machine {
+        .ball {
+            font-size: 80px;
+            margin: 20px;
+            animation: ballMove 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes ballMove {
+
+            from {
+                transform: translateX(-50px) rotate(0deg);
+            }
+
+            to {
+                transform: translateX(50px) rotate(360deg);
+            }
+
+        }
+
+        .start-button {
+            font-size: 30px;
+            font-weight: 900;
+            padding: 20px 60px;
+            border: 4px solid #d4af37;
+            border-radius: 60px;
+            background: #111;
+            color: #d4af37;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 0 20px rgba(212,175,55,0.5);
+        }
+
+        .start-button:hover {
+            background: #d4af37;
+            color: black;
+            transform: scale(1.1);
+        }
+
+        /* =========================
+           GAME
+        ========================= */
+
+        #game {
+            display: none;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .stadium {
+            position: relative;
+            width: 95%;
+            max-width: 750px;
+            height: 280px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 20px;
+            border: 3px solid #d4af37;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #222 0%,
+                    #222 35%,
+                    #0d6b2d 35%,
+                    #159447 100%
+                );
+        }
+
+        /* 관중 */
+        .crowd {
+            font-size: 25px;
+            letter-spacing: 5px;
+            padding-top: 15px;
+            white-space: nowrap;
+        }
+
+        /* 골대 */
+        .goal {
+            position: absolute;
+            right: 35px;
+            bottom: 35px;
+            width: 190px;
+            height: 130px;
+            border: 7px solid white;
+            border-bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 18px,
+                    rgba(255,255,255,0.25) 19px,
+                    transparent 20px
+                );
+        }
+
+        .goalkeeper {
+            position: absolute;
+            right: 100px;
+            bottom: 35px;
+            font-size: 65px;
+            z-index: 3;
+        }
+
+        .football {
+            position: absolute;
+            left: 80px;
+            bottom: 40px;
+            font-size: 55px;
+            transition: all 1s ease;
+            z-index: 5;
+        }
+
+        .football.shoot {
+            left: 560px;
+            bottom: 140px;
+            transform: rotate(720deg) scale(0.7);
+        }
+
+        .football.save {
+            left: 560px;
+            bottom: 70px;
+            transform: rotate(720deg) scale(0.7);
+        }
+
+        .player {
+            position: absolute;
+            left: 70px;
+            bottom: 30px;
+            font-size: 75px;
+            z-index: 4;
+        }
+
+        /* =========================
+           QUESTION
+        ========================= */
+
+        .question-box {
+            width: 90%;
             max-width: 700px;
-            margin: 25px auto;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.06);
+            margin: 20px auto;
+            padding: 25px;
+            background: rgba(255,255,255,0.06);
             border: 2px solid #d4af37;
             border-radius: 25px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
         }
 
         #question {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-
-        /* 버튼 전체 */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        button {
-            font-size: 20px;
-            font-weight: bold;
-            padding: 18px 30px;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 3px solid #d4af37;
-            color: white;
-            background: #111;
-        }
-
-        /* 버튼 1 - 둥근 */
-        .button1 {
-            border-radius: 50px;
-        }
-
-        /* 버튼 2 - 네모 */
-        .button2 {
-            border-radius: 5px;
-        }
-
-        /* 버튼 3 - 육각형 느낌 */
-        .button3 {
-            border-radius: 20px 5px 20px 5px;
-        }
-
-        button:hover {
-            transform: scale(1.08);
-            background: #d4af37;
-            color: black;
-            box-shadow: 0 0 20px #d4af37;
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        #feedback {
             font-size: 30px;
-            min-height: 45px;
-            margin-top: 25px;
-            font-weight: 900;
-        }
-
-        #score {
-            color: #d4af37;
-            font-size: 20px;
-            margin-top: 15px;
+            font-weight: bold;
         }
 
         .progress {
             color: #aaa;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        /* SIUUUU */
-        .siuuu {
-            font-size: 55px;
+        /* =========================
+           ANSWER BUTTONS
+        ========================= */
+
+        .answers {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .answer {
+            min-width: 150px;
+            padding: 18px 25px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            background: #111;
+            border: 3px solid #d4af37;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .answer:hover {
+            background: #d4af37;
+            color: black;
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(212,175,55,0.4);
+        }
+
+        .answer:nth-child(1) {
+            border-radius: 50px;
+        }
+
+        .answer:nth-child(2) {
+            border-radius: 5px 25px 5px 25px;
+        }
+
+        .answer:nth-child(3) {
+            border-radius: 15px;
+            transform: rotate(-1deg);
+        }
+
+        .answer:nth-child(3):hover {
+            transform: rotate(1deg) translateY(-7px);
+        }
+
+        /* =========================
+           FEEDBACK
+        ========================= */
+
+        #feedback {
+            min-height: 70px;
+            font-size: 35px;
             font-weight: 900;
-            color: #d4af37;
-            animation: jump 0.6s infinite alternate;
+            margin: 15px;
         }
 
-        @keyframes jump {
+        .goal-text {
+            color: #d4af37;
+            animation: goalAnimation 0.7s infinite alternate;
+        }
+
+        @keyframes goalAnimation {
+
             from {
-                transform: translateY(0);
+                transform: scale(1);
             }
 
             to {
-                transform: translateY(-10px);
+                transform: scale(1.2);
             }
+
         }
 
-        .footer {
-            margin: 30px;
-            color: #777;
-            font-size: 14px;
+        .miss-text {
+            color: #ff5555;
+        }
+
+        /* =========================
+           CELEBRATION
+        ========================= */
+
+        #celebration {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 20;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .siuuu {
+            font-size: 100px;
+            font-weight: 900;
+            font-style: italic;
+            color: #d4af37;
+            text-shadow:
+                5px 5px 0 black,
+                0 0 30px #d4af37;
+            animation: siuuu 0.6s infinite alternate;
+        }
+
+        @keyframes siuuu {
+
+            from {
+                transform: scale(1) rotate(-3deg);
+            }
+
+            to {
+                transform: scale(1.15) rotate(3deg);
+            }
+
+        }
+
+        .celebration-text {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* =========================
+           FINAL
+        ========================= */
+
+        #finalScreen {
+            display: none;
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 40px 20px;
+        }
+
+        .trophy {
+            font-size: 100px;
+        }
+
+        .final-title {
+            font-size: 50px;
+            color: #d4af37;
+            font-weight: 900;
+        }
+
+        .final-score {
+            font-size: 45px;
+            margin: 25px;
+        }
+
+        .restart {
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border: 3px solid #d4af37;
+            border-radius: 40px;
+            background: #111;
+            color: white;
+            cursor: pointer;
+        }
+
+        .restart:hover {
+            background: #d4af37;
+            color: black;
+        }
+
+        /* 모바일 */
+
+        @media (max-width: 600px) {
+
+            .cr7 {
+                font-size: 60px;
+            }
+
+            .big-seven {
+                font-size: 120px;
+            }
+
+            #question {
+                font-size: 23px;
+            }
+
+            .siuuu {
+                font-size: 65px;
+            }
+
+            .goal {
+                right: 20px;
+                width: 150px;
+            }
+
+            .football.shoot,
+            .football.save {
+                left: 500px;
+            }
+
         }
 
     </style>
+
 </head>
 
 
 <body>
 
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
     <div class="top">
 
         <div class="cr7">CR7</div>
 
-        <div class="subtitle">
-            SIUUUU WORD MACHINE
+        <div class="title">
+            SIUUUU WORD FOOTBALL
         </div>
 
-        <img
-            class="ronaldo-photo"
-            src="https://static.znews.vn/static/topic/person/cristiano-ronaldo.jpg"
-            alt="Cristiano Ronaldo">
+        <div class="subtitle">
+            KNOW THE WORD • SCORE THE GOAL • SIUUUU
+        </div>
 
-        <div class="number-seven">
+    </div>
+
+
+    <!-- SCOREBOARD -->
+
+    <div class="scoreboard">
+
+        <div>
+            GOALS<br>
+            <span class="score-number" id="goals">0</span>
+        </div>
+
+        <div>
+            QUESTION<br>
+            <span class="score-number" id="questionNumber">0/5</span>
+        </div>
+
+        <div>
+            CR7<br>
+            <span class="score-number">7</span>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         START SCREEN
+    ========================= -->
+
+    <div id="startScreen">
+
+        <div class="big-seven">
             7
         </div>
 
-    </div>
-
-
-    <div class="machine">
-
-        <div class="progress" id="progress">
-            Question 1 / 5
+        <div class="ball">
+            ⚽
         </div>
 
-        <p id="question">
-            What does "look for" mean?
+        <h2>
+            READY TO BECOME THE WORD GOAT?
+        </h2>
+
+        <p>
+            Answer the vocabulary question and score a goal!
         </p>
 
+        <br>
 
-        <div class="buttons">
-
-            <button class="button1" id="button1">
-                Search
-            </button>
-
-            <button class="button2" id="button2">
-                Avoid
-            </button>
-
-            <button class="button3" id="button3">
-                Watch
-            </button>
-
-        </div>
-
-
-        <h3 id="feedback"></h3>
-
-        <p id="score"></p>
+        <button class="start-button" onclick="startGame()">
+            ⚽ START MATCH
+        </button>
 
     </div>
 
 
-    <div class="footer">
-        WORK HARD • DREAM BIG • SIUUUU
+    <!-- =========================
+         GAME
+    ========================= -->
+
+    <div id="game">
+
+
+        <!-- STADIUM -->
+
+        <div class="stadium">
+
+            <div class="crowd">
+                👏 👏 🧑 👏 👏 🧑 👏 👏 🧑 👏 👏 🧑
+            </div>
+
+            <div class="goal"></div>
+
+            <div class="goalkeeper">
+                🧤
+            </div>
+
+            <div class="player">
+                🏃‍♂️
+            </div>
+
+            <div class="football" id="football">
+                ⚽
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION -->
+
+        <div class="question-box">
+
+            <div class="progress" id="progress">
+                Question 1 / 5
+            </div>
+
+            <div id="question">
+                What does "look for" mean?
+            </div>
+
+
+            <div class="answers">
+
+                <button class="answer" id="answer1">
+                    Search
+                </button>
+
+                <button class="answer" id="answer2">
+                    Avoid
+                </button>
+
+                <button class="answer" id="answer3">
+                    Watch
+                </button>
+
+            </div>
+
+
+            <div id="feedback"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CELEBRATION
+    ========================= -->
+
+    <div id="celebration">
+
+        <div class="siuuu">
+            SIUUUUUU!
+        </div>
+
+        <div class="celebration-text">
+            ⚽ GOOOOOOAL! ⚽
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FINAL SCREEN
+    ========================= -->
+
+    <div id="finalScreen">
+
+        <div class="trophy">
+            🏆
+        </div>
+
+        <div class="final-title">
+            FULL TIME
+        </div>
+
+        <div class="final-score" id="finalScore">
+            5 / 5
+        </div>
+
+        <p id="finalMessage"></p>
+
+        <br>
+
+        <button class="restart" onclick="location.reload()">
+            🔄 PLAY AGAIN
+        </button>
+
     </div>
 
 
 
     <script>
 
-        let currentQuestion = 0;
 
-        let correctAnswers = 0;
-
+        /* =========================
+           QUESTIONS
+        ========================= */
 
         const questions = [
 
             {
                 word: "look for",
                 answer: "search",
-                choices: ["Search", "Avoid", "Watch"]
+                choices: [
+                    "Search",
+                    "Avoid",
+                    "Watch"
+                ]
             },
 
             {
                 word: "huge",
                 answer: "big",
-                choices: ["Small", "Big", "Slow"]
+                choices: [
+                    "Small",
+                    "Big",
+                    "Slow"
+                ]
             },
 
             {
                 word: "rapid",
                 answer: "fast",
-                choices: ["Slow", "Fast", "Quiet"]
+                choices: [
+                    "Slow",
+                    "Fast",
+                    "Quiet"
+                ]
             },
 
             {
                 word: "purchase",
                 answer: "buy",
-                choices: ["Sell", "Buy", "Borrow"]
+                choices: [
+                    "Sell",
+                    "Buy",
+                    "Borrow"
+                ]
             },
 
             {
                 word: "difficult",
                 answer: "hard",
-                choices: ["Easy", "Hard", "Funny"]
+                choices: [
+                    "Easy",
+                    "Hard",
+                    "Funny"
+                ]
             }
 
         ];
 
 
+        let currentQuestion = 0;
+
+        let goals = 0;
+
+        let answered = false;
+
+
+        /* =========================
+           ELEMENTS
+        ========================= */
+
+        const startScreen =
+            document.getElementById("startScreen");
+
+        const game =
+            document.getElementById("game");
+
+        const finalScreen =
+            document.getElementById("finalScreen");
+
+        const celebration =
+            document.getElementById("celebration");
+
+        const football =
+            document.getElementById("football");
+
+        const feedback =
+            document.getElementById("feedback");
+
+
         const buttons = [
 
-            document.getElementById("button1"),
-            document.getElementById("button2"),
-            document.getElementById("button3")
+            document.getElementById("answer1"),
+
+            document.getElementById("answer2"),
+
+            document.getElementById("answer3")
 
         ];
 
 
+        /* =========================
+           START
+        ========================= */
+
+        function startGame() {
+
+            startScreen.style.display = "none";
+
+            game.style.display = "block";
+
+            currentQuestion = 0;
+
+            goals = 0;
+
+            document.getElementById("goals").innerText = goals;
+
+            showQuestion();
+
+        }
+
+
+        /* =========================
+           SHOW QUESTION
+        ========================= */
+
         function showQuestion() {
 
-            let question = questions[currentQuestion];
+            answered = false;
+
+            let q = questions[currentQuestion];
 
 
             document.getElementById("question").innerText =
-                'What does "' + question.word + '" mean?';
+                'What does "' + q.word + '" mean?';
 
 
             document.getElementById("progress").innerText =
@@ -298,112 +790,212 @@
                 questions.length;
 
 
+            document.getElementById("questionNumber").innerText =
+                (currentQuestion + 1) +
+                "/" +
+                questions.length;
+
+
             for (let i = 0; i < 3; i++) {
 
                 buttons[i].innerText =
-                    question.choices[i];
+                    q.choices[i];
 
                 buttons[i].onclick = function () {
 
                     checkAnswer(
-                        question.choices[i].toLowerCase()
+                        q.choices[i].toLowerCase()
                     );
 
                 };
 
+                buttons[i].disabled = false;
+
             }
 
 
-            document.getElementById("feedback").innerText = "";
+            feedback.innerText = "";
+
+            football.className = "football";
 
         }
 
 
+        /* =========================
+           ANSWER
+        ========================= */
 
         function checkAnswer(answer) {
 
-            let question = questions[currentQuestion];
+            if (answered) {
+                return;
+            }
+
+            answered = true;
 
 
-            if (answer === question.answer) {
+            buttons.forEach(function(button) {
 
-                correctAnswers++;
+                button.disabled = true;
 
-                document.getElementById("feedback").innerHTML =
-                    '<div class="siuuu">SIUUUU! ⚽</div>';
+            });
+
+
+            let q = questions[currentQuestion];
+
+
+            if (answer === q.answer) {
+
+                /* GOAL */
+
+                goals++;
+
+                document.getElementById("goals").innerText =
+                    goals;
+
+
+                feedback.innerHTML =
+                    '<span class="goal-text">⚽ GOAL!!!</span>';
+
+
+                football.className =
+                    "football shoot";
+
+
+                setTimeout(function() {
+
+                    showCelebration();
+
+                }, 700);
+
 
             }
 
             else {
 
-                document.getElementById("feedback").innerText =
-                    "❌ NOOOO! Answer: " +
-                    question.answer;
+                /* MISS */
+
+                feedback.innerHTML =
+                    '<span class="miss-text">❌ MISS!</span><br>' +
+                    '<small>Answer: ' +
+                    q.answer +
+                    '</small>';
+
+
+                football.className =
+                    "football save";
+
+
+                setTimeout(function() {
+
+                    nextQuestion();
+
+                }, 1500);
 
             }
 
+        }
+
+
+        /* =========================
+           CELEBRATION
+        ========================= */
+
+        function showCelebration() {
+
+            celebration.style.display =
+                "flex";
+
+
+            setTimeout(function() {
+
+                celebration.style.display =
+                    "none";
+
+
+                nextQuestion();
+
+            }, 1800);
+
+        }
+
+
+        /* =========================
+           NEXT QUESTION
+        ========================= */
+
+        function nextQuestion() {
 
             currentQuestion++;
 
 
             if (currentQuestion < questions.length) {
 
-                setTimeout(function () {
-
-                    showQuestion();
-
-                }, 1200);
+                showQuestion();
 
             }
 
             else {
 
-                setTimeout(function () {
-
-                    finishQuiz();
-
-                }, 1200);
+                finishGame();
 
             }
 
         }
 
 
+        /* =========================
+           FINISH
+        ========================= */
 
-        function finishQuiz() {
+        function finishGame() {
 
-            document.getElementById("question").innerText =
-                "🏆 QUIZ FINISHED! 🏆";
-
-
-            document.getElementById("progress").innerText =
-                "FULL TIME";
-
-
-            document.getElementById("feedback").innerHTML =
-                '<div class="siuuu">SIUUUU!</div>';
+            game.style.display =
+                "none";
 
 
-            document.getElementById("score").innerText =
-                "CR7 SCORE: " +
-                correctAnswers +
-                " / " +
-                questions.length;
+            finalScreen.style.display =
+                "block";
 
 
-            buttons.forEach(function(button) {
+            document.getElementById("finalScore").innerText =
+                goals + " / " + questions.length;
 
-                button.style.display = "none";
 
-            });
+            let message = "";
+
+
+            if (goals === 5) {
+
+                message =
+                    "🐐 PERFECT! You are the WORD GOAT! SIUUUUUU!";
+
+            }
+
+            else if (goals >= 3) {
+
+                message =
+                    "🔥 Great match! Keep practicing your vocabulary!";
+
+            }
+
+            else {
+
+                message =
+                    "💪 Keep training! Come back and score more goals!";
+
+            }
+
+
+            document.getElementById("finalMessage").innerText =
+                message;
 
         }
 
-
-        showQuestion();
-
     </script>
+
 
 </body>
 
 </html>
+```
