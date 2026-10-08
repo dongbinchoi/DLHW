@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>영어 발음 연습기</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        sans-serif;
+
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 760px;
+      background: white;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    .description {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 28px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      resize: vertical;
+
+      padding: 18px;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+
+      font-size: 18px;
+      line-height: 1.6;
+      outline: none;
+
+      transition: border-color 0.2s;
+    }
+
+    textarea:focus {
+      border-color: #6366f1;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 16px;
+
+      font-size: 17px;
+      font-weight: 700;
+
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .us-button {
+      background: #2563eb;
+      color: white;
+    }
+
+    .uk-button {
+      background: #dc2626;
+      color: white;
+    }
+
+    .stop-button {
+      width: 100%;
+      margin-top: 14px;
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #f8fafc;
+
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .settings {
+      margin-top: 24px;
+      padding: 18px;
+      background: #f8fafc;
+      border-radius: 16px;
+    }
+
+    .settings-title {
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .setting-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .setting-row label {
+      min-width: 70px;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    input[type="range"] {
+      flex: 1;
+    }
+
+    .value {
+      width: 45px;
+      text-align: right;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 22px;
+        border-radius: 18px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      textarea {
+        min-height: 180px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>영어 발음 연습기</h1>
+
+    <p class="description">
+      영어 문장을 입력하고 미국식 또는 영국식 발음으로 들어보세요.
+    </p>
+
+    <textarea
+      id="textInput"
+      placeholder="예: Hello, how are you today?
+
+I would like to improve my English pronunciation."
+    ></textarea>
+
+    <div class="controls">
+
+      <button
+        class="us-button"
+        onclick="speak('US')"
+      >
+        🇺🇸 미국식 영어
+      </button>
+
+      <button
+        class="uk-button"
+        onclick="speak('UK')"
+      >
+        🇬🇧 영국식 영어
+      </button>
+
+    </div>
+
+    <button
+      class="stop-button"
+      onclick="stopSpeaking()"
+    >
+      ■ 음성 정지
+    </button>
+
+    <div class="settings">
+
+      <div class="settings-title">
+        음성 설정
+      </div>
+
+      <div class="setting-row">
+        <label>속도</label>
+
+        <input
+          id="rate"
+          type="range"
+          min="0.5"
+          max="1.5"
+          step="0.1"
+          value="1"
+          oninput="updateValue()"
+        />
+
+        <span
+          id="rateValue"
+          class="value"
+        >
+          1.0
+        </span>
+      </div>
+
+      <div class="setting-row">
+        <label>음높이</label>
+
+        <input
+          id="pitch"
+          type="range"
+          min="0.5"
+          max="1.5"
+          step="0.1"
+          value="1"
+          oninput="updateValue()"
+        />
+
+        <span
+          id="pitchValue"
+          class="value"
+        >
+          1.0
+        </span>
+      </div>
+
+    </div>
+
+    <div
+      id="status"
+      class="status"
+    >
+      문장을 입력한 후 발음을 선택하세요.
+    </div>
+
+  </div>
+
+
+  <script>
+
+    // 브라우저가 제공하는 음성 목록
+    let voices = [];
+
+    function loadVoices() {
+      voices = speechSynthesis.getVoices();
+    }
+
+    speechSynthesis.onvoiceschanged = loadVoices;
+
+    loadVoices();
+
+
+    // 화면의 속도/음높이 값 업데이트
+    function updateValue() {
+
+      const rate =
+        document.getElementById("rate").value;
+
+      const pitch =
+        document.getElementById("pitch").value;
+
+      document.getElementById("rateValue").textContent =
+        Number(rate).toFixed(1);
+
+      document.getElementById("pitchValue").textContent =
+        Number(pitch).toFixed(1);
+    }
+
+
+    // 미국식 / 영국식 음성 찾기
+    function findVoice(type) {
+
+      const targetLanguages =
+        type === "US"
+          ? ["en-US"]
+          : ["en-GB"];
+
+      // 1순위: 정확한 locale
+      let voice = voices.find(v =>
+        targetLanguages.includes(v.lang)
+      );
+
+      if (voice) {
+        return voice;
+      }
+
+      // 2순위: 언어가 영어인 음성
+      voice = voices.find(v =>
+        v.lang.toLowerCase().startsWith("en")
+      );
+
+      return voice || null;
+    }
+
+
+    // 음성 출력
+    function speak(type) {
+
+      const text =
+        document.getElementById("textInput")
+          .value
+          .trim();
+
+      if (!text) {
+
+        alert("먼저 읽어줄 영어 문장을 입력해주세요.");
+
+        return;
+      }
+
+
+      // 기존 음성 중지
+      speechSynthesis.cancel();
+
+
+      const utterance =
+        new SpeechSynthesisUtterance(text);
+
+
+      // 미국식 / 영국식 선택
+      if (type === "US") {
+
+        utterance.lang = "en-US";
+
+      } else {
+
+        utterance.lang = "en-GB";
+
+      }
+
+
+      // 음성 목록에서 실제 voice 선택
+      const selectedVoice =
+        findVoice(type);
+
+      if (selectedVoice) {
+
+        utterance.voice =
+          selectedVoice;
+
+      }
+
+
+      // 속도
+      utterance.rate =
+        Number(
+          document.getElementById("rate").value
+        );
+
+
+      // 음높이
+      utterance.pitch =
+        Number(
+          document.getElementById("pitch").value
+        );
+
+
+      // 상태 표시
+      const status =
+        document.getElementById("status");
+
+      status.textContent =
+        type === "US"
+          ? "🇺🇸 미국식 영어로 읽는 중..."
+          : "🇬🇧 영국식 영어로 읽는 중...";
+
+
+      utterance.onend = function () {
+
+        status.textContent =
+          "재생이 완료되었습니다.";
+
+      };
+
+
+      utterance.onerror = function (event) {
+
+        console.error(event);
+
+        status.textContent =
+          "음성을 재생할 수 없습니다.";
+
+      };
+
+
+      // 실제 재생
+      speechSynthesis.speak(
+        utterance
+      );
+    }
+
+
+    // 음성 정지
+    function stopSpeaking() {
+
+      speechSynthesis.cancel();
+
+      document.getElementById("status")
+        .textContent =
+        "음성이 정지되었습니다.";
+    }
+
+  </script>
+
+</body>
+</html>
